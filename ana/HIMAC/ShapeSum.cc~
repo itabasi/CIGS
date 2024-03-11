@@ -1,0 +1,72 @@
+
+const int nch =2;
+
+void ShapeSum(){
+  gStyle->SetPalette(kRainBow); 
+
+  string rname[10];
+  int runnum[10];
+  // ---------- CIGS 5 num --------- //
+  runnum[0] = 63;
+  runnum[1] = 64;
+  runnum[2] = 65;
+  runnum[3] = 66;
+  runnum[4] = 67;
+  runnum[5] = 68;
+  runnum[6] = 69;
+
+  int nfile =7;
+  TFile* f[10];
+  TH1F* hADC[nfile][nch];
+  TH1F* hRes[nfile];
+  TGraphErrors* gRes[nfile];
+  TCanvas* c0 = new TCanvas("c0","c0");
+  c0->Divide(2,1);
+  
+  for(int i=0;i<nfile; i++){
+    rname[i] = Form("./RootFiles/shapeAna/run_%d.root",runnum[i]);
+    f[i] = new TFile(rname[i].c_str());    
+    hRes[i] = new TH1F(Form("hRes_%d",i),"",nfile,-0.5,nfile-0.5);
+    gRes[i] = new TGraphErrors();
+    gRes[i] -> SetName();
+    for(int j=0; j<nch;j++){
+      hADC[i][j] = (TH1F*)f[i]->Get(Form("hADC_%d",j));
+      hADC[i][j] ->SetName(Form("hADC_%d_%d",i,j));
+      if(j==0){
+	c0->cd(1);
+	gPad->SetLogy(1);
+	if(i==0) hADC[i][j]->Draw("PLC PMC hist");
+	else  hADC[i][j]->Draw("PLC PMC hist same");
+	
+      }else if(j ==1){
+	c0->cd(2);
+	gPad->SetLogy(1);
+	if(i==0) hADC[i][j]->Draw("PLC PMC hist");
+	else  hADC[i][j]->Draw("PLC PMC hist same");
+      }
+    }
+  }
+  
+
+
+
+  // ========= Analysis  ============ //
+
+  TH1F* hADC_diff[nch];
+  for(int ich =0; ich < nch ; ich++){
+    int nbin = hADC[0][ich]->GetXaxis()->GetNbin();
+    for(int ibin=0; ibin < nbin; ibin++){
+      
+    }
+    
+  }
+  
+  // =============================== //
+  
+
+
+
+
+    
+  
+}

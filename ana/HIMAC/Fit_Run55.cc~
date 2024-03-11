@@ -1,0 +1,55 @@
+//Study of the noise
+
+const int nch=8;
+void Fit_Run55(){
+
+  string rname="../RootFile/itabashi/run_55.root";
+
+  TChain* T = new TChain("T");
+  T->Add(rname.c_str());
+  int ENum = T->GetEntries();
+  cout<<"ENum "<<ENum<<endl;
+  float IADC[nch];
+  T->SetBranchAddress("IntegratedADC",IADC);
+  TH1D* hADC[nch];
+  TGraphErrors* gCut[nch];  
+  for(int i=0;i<nch;i++){
+    hADC[i] = new TH1D(Form("hADC_%d",i),"",250,-100,400);
+    gCug[i] = new TGraphErrors();
+  }
+  
+  for(int iev=0; iev<ENum;iev++){
+
+    T->GetEntry(iev);
+    for(int i=0;i<nch;i++){
+      hADC[i]->Fill(IADC[i]);
+    }
+
+
+  }
+
+
+  //======== Fitting =========//
+  TF1* fPeak = new TF1("fPeak","gausn(0)",-100,400);
+  TF1* fPed = new TF1("fPed","gausn(0)",-100,400);
+
+  fPeak->SetParameters(2.19046e+02,2.19632e+02,3.29554e+01);
+  fPed->SetParameters(7.46905e+02 ,-1.85442e-01,1.14278e+01);
+
+  hADC[0]->Fit("fPeak","QR","QR",100,400);
+  hADC[0]->Fit("fPed","QR","QR",-100,50);
+
+  double Nfit = fPeak->GetParameter(0) + fPed->GetParameter(0);
+  double Nhist = hADC[0]->Integral(-100,400);
+  cout<<"Nfit "<<Nfit <<" Nhist "<<Nhist*2<<endl;
+  TCanvas* c0 = new TCanvas("c0","c0");
+  c0->cd();
+  hADC[0]->Draw();
+  fPeak->Draw("same");
+  fPed->Draw("same");
+
+
+
+
+  
+}

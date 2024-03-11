@@ -1,0 +1,4 @@
+load setfile/setup1_mod_ch0_TESTSIG.txt
+load setfile/setup2_mod_ch0_TESTSIG.txt
+load setfile/setup3_mod_ch0_TESTSIG.txt
+load setfile/setup4_mod_ch0_TESTSIG.txt

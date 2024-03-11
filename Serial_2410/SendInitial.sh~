@@ -1,0 +1,22 @@
+#!/bin/bash
+
+  echo ":SOURCE:FUNCTION VOLTAGE" >> /dev/ttyUSB1
+  echo ":SOURCE:VOLTAGE:MODE FIXED" >> /dev/ttyUSB1
+  echo ":SOURCE:VOLTAGE:RANGE MAX" >> /dev/ttyUSB1
+
+  echo ":TRIGGER:COUNT 1" >> /dev/ttyUSB1
+  echo ":SENSE:CURRENT:RANGE 10E-6" >> /dev/ttyUSB1
+  echo ":SENSE:FUNCTION 'CURR'" >> /dev/ttyUSB1
+  echo ":SENSE:FUNCTION 'VOLT'" >> /dev/ttyUSB1
+  echo ":FORMAT:ELEMENTS VOLTAGE,CURRENT" >> /dev/ttyUSB1
+
+  # added by itbashi 2022/09/24
+  echo ":SENS:AVER:TCON REP" >> /dev/ttyUSB1
+#  echo ":SENS:AVER:TCON MOV" >> /dev/ttyUSB1
+#  echo ":SENS:AVER:COUN 100" >> /dev/ttyUSB1
+  echo ":SENS:AVER:COUN 10" >> /dev/ttyUSB1
+  echo ":SENS:AVER ON" >> /dev/ttyUSB1
+#Configuring Voltage and the current compliance.
+  echo ":SENSE:CURRENT:PROTECTION 100E-6" >> /dev/ttyUSB1
+  echo ":SOURCE:VOLTAGE:LEVEL 0" >> /dev/ttyUSB1
+

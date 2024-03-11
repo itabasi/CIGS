@@ -1,0 +1,6 @@
+load setfile/init1_D.txt
+load setfile/init2_D.txt
+load setfile/init3_D.txt
+load setfile/init4_D.txt
+load setfile/init1_D.txt
+load setfile/init2_D.txt

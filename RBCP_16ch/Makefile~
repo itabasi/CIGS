@@ -1,0 +1,10 @@
+rbcp.o: rbcp.c
+		g++  -g -O2 -Wall -pthread -m64 $(shell root-config --cflags --glibs)  -c -o lib/rbcp.o rbcp.c
+
+DAQ: lib/rbcp.o lib/setup.o lib/DAQ.o lib/rdf2root.o
+		g++ -g -O2 -Wall -o bin/DAQ lib/rbcp.o lib/setup.o lib/DAQ.o $(shell root-config --cflags --glibs) -ltbb 
+
+clean:
+
+		rm -f ./bin/*.o
+		rm -f ./lib/*.o

@@ -1,0 +1,13 @@
+#!/bin/csh
+
+set RUNNUM=$argv[1] 
+
+    root -b<<EOF
+    .L Read_test.C+
+Read($RUNNUM)
+.q
+EOF
+endif
+
+
+

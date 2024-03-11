@@ -1,0 +1,3 @@
+load setfile/TEST_CDC_setup1_B.txt
+load setfile/TEST_CDC_setup2_B.txt
+load setfile/TEST_CDC_setup3_B.txt
